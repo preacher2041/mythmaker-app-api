@@ -99,7 +99,17 @@ class ModelTests(TestCase):
 
         tag = models.Tag.objects.create(
             user=sample_user(),
-            name='BBEG'
+            name='Test Tag'
         )
 
         self.assertEqual(str(tag), tag.name)
+
+    def test_world_str(self):
+        """Test the world string representation"""
+
+        world = models.World.objects.create(
+            user=sample_user(),
+            name='World Name',
+        )
+
+        self.assertEqual(str(world), world.name)
