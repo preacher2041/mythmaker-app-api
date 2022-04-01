@@ -113,3 +113,12 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(world), world.name)
+
+    def test_campaign_str(self):
+        """Test the campaign string representation"""
+        campaign = models.Campaign.objects.create(
+            user=sample_user(),
+            name='Campaign Name'
+        )
+
+        self.assertEqual(str(campaign), campaign.name)

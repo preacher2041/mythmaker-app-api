@@ -44,6 +44,18 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name', 'dob']
 
 
+class Campaign(models.Model):
+    """Campaign object"""
+    name = models.CharField(max_length=255)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return self.name
+
+
 class Tag(models.Model):
     """Tags to be used for campaigns"""
     name = models.CharField(max_length=255)
