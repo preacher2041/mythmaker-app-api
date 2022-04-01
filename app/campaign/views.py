@@ -2,7 +2,7 @@ from rest_framework import viewsets, mixins
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from core.models import Tag, World
+from core.models import Campaign, Tag, World
 
 from campaign import serializers
 
@@ -22,6 +22,18 @@ class BaseCampaignAttrViewset(viewsets.GenericViewSet,
     def perform_create(self, serializer):
         """Create a new object"""
         serializer.save(user=self.request.user)
+
+
+class CampaignViewSet(viewsets.ModelViewSet):
+    """Manage campaigns in the database"""
+    serializer_class = serializers.CampaignSerializer
+    queryset = Campaign.objects.all()
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        """Retrieve campaigns for authenticated user"""
+        return self.queryset.filter(user=self.request.user).order_by('-id')
 
 
 class TagViewSet(BaseCampaignAttrViewset):

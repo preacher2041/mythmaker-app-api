@@ -5,8 +5,9 @@ from campaign import views
 
 
 router = DefaultRouter()
+router.register('campaigns', views.CampaignViewSet)
 router.register('tags', views.TagViewSet)
-router.register('world', views.WorldViewSet)
+router.register('worlds', views.WorldViewSet)
 
 app_name = 'campaign'
 
